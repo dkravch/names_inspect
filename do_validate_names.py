@@ -7,7 +7,7 @@ import numpy as np
 from sklearn.cluster import AffinityPropagation
 import distance
 
-PATH = os.environ.get("BANANA", "/home/dkravchenko/WORK/ON_THE_ROAD/CODE/NOT_MY/ttf_udp")
+PATH = os.environ.get("NAME_VALIDATION_PATH", "/home/dkravchenko/WORK/ON_THE_ROAD/CODE/NOT_MY/ttf_udp")
 EXCLUDE_NAMES = keyword.kwlist + [i for i in dir(builtins) if not i.startswith("__")]
 
 # TODO Variable like self.smth, cls.smth, in-class defi
@@ -115,7 +115,7 @@ for root, dirs, files in os.walk(PATH, topdown=False):
             print("\n(names, assigned to only, not used)")
             for cluster in grouped_names:
                 filtered_name_nodes = sorted([GeneralNode(node) for node in name_nodes
-                                              if getattr(node, 'id', None) or getattr(node, 'attr', None) in cluster],
+                                              if (getattr(node, 'id', None) or getattr(node, 'attr', None)) in cluster],
                                              key=lambda x: getattr(x.instance, 'id', None) or getattr(x.instance,
                                                                                                       'attr', None))
 
